@@ -2,8 +2,11 @@ import { v1 } from "uuid";
 import { TasksStateType } from "../App";
 import { addTodolistAC, removeTodolistAC } from "./todolists-reducer";
 
+
+const initialState:TasksStateType = {};
+
 export const tasksReducer = (
-  state: TasksStateType,
+  state: TasksStateType = initialState,
   action: TasksReducerType
 ): TasksStateType => {
   switch (action.type) {
@@ -31,7 +34,7 @@ export const tasksReducer = (
             : t
         ),
       };
-    case "EDIT-TASK":
+    case "EDIT-TASK-TITLE":
       return {
         ...state,
         [action.payload.todolistID]: state[action.payload.todolistID].map((t) =>
@@ -61,7 +64,7 @@ type TasksReducerType =
 type removeTaskACType = ReturnType<typeof removeTaskAC>;
 type addTaskACType = ReturnType<typeof addTaskAC>;
 type changeStatusACType = ReturnType<typeof changeStatusAC>;
-type editTaskACType = ReturnType<typeof editTaskAC>;
+type editTaskACType = ReturnType<typeof editTaskTitleAC>;
 
 type addTodolistACType = ReturnType<typeof addTodolistAC>;
 type removeTodolistACType = ReturnType<typeof removeTodolistAC>;
@@ -91,13 +94,13 @@ export const changeStatusAC = (
   } as const;
 };
 
-export const editTaskAC = (
+export const editTaskTitleAC = (
   todolistID: string,
   taskID: string,
   newTitle: string
 ) => {
   return {
-    type: "EDIT-TASK",
+    type: "EDIT-TASK-TITLE",
     payload: { todolistID, taskID, newTitle },
   } as const;
 };
