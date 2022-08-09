@@ -5,7 +5,9 @@ type AddItemFormType = {
   callBack: (taskTitle: string) => void;
 };
 
-export const AddItemForm = (props: AddItemFormType) => {
+export const AddItemForm = React.memo(function (props: AddItemFormType) {
+  console.log("AddItemForm called");
+
   let [title, setTitle] = useState("");
   let [error, setError] = useState<string | null>(null);
 
@@ -23,7 +25,7 @@ export const AddItemForm = (props: AddItemFormType) => {
   };
 
   const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-    setError(null);
+    if (error !== null) setError(null);
     if (e.key === "Enter") {
       addTask();
     }
@@ -57,4 +59,4 @@ export const AddItemForm = (props: AddItemFormType) => {
       </Button>
     </div>
   );
-};
+});

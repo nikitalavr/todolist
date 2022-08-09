@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 
-export default function ButtonAppBar() {
+const ButtonAppBar = React.memo(() => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -29,4 +29,7 @@ export default function ButtonAppBar() {
       </AppBar>
     </Box>
   );
-}
+})
+
+export default ButtonAppBar
+
